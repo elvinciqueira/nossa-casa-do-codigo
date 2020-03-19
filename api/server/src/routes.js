@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
+import AutorController from './app/controllers/AutorController';
+
 const routes = new Router();
 
-routes.get('/', (req, res) => res.json({ message: 'Welcome to Omni CLI' }));
+routes.post('/autores', AutorController.store);
 
 export default routes;
