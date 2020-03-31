@@ -7,7 +7,7 @@ export default async (req, res, next) => {
       resumo: Yup.string()
         .required()
         .test(
-          'O resumo só pode conter 400 caracteres',
+          'O resumo só pode conter 500 caracteres',
           resumo => resumo.length <= 500
         ),
       isbn: Yup.string().required(),
