@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import AutorController from './app/controllers/AutorController';
 import CategoriaController from './app/controllers/CategoriaController';
+import LivroController from './app/controllers/LivroController';
 
 import validateAutorStore from './app/validators/AutorStore';
 import validateCategoriaCreate from './app/validators/CategoriaCreate';
@@ -9,7 +10,10 @@ import validateNomeCategoria from './app/validators/CheckNomeCategoria';
 
 const routes = new Router();
 
-routes.post('/autores', validateAutorStore, AutorController.store);
+routes.post('/autor', validateAutorStore, AutorController.store);
+routes.get('/autores', AutorController.index);
+
+routes.get('/categorias', CategoriaController.index);
 
 routes.post(
   '/categoria',
@@ -17,5 +21,7 @@ routes.post(
   validateNomeCategoria,
   CategoriaController.create
 );
+
+routes.post('/livros', LivroController.create);
 
 export default routes;
