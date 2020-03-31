@@ -22,6 +22,7 @@ routes.post(
   CategoriaController.create
 );
 
-routes.post('/livros', LivroController.create);
+routes.post('/livro', LivroController.create);
+routes.get('/livros', LivroController.index);
 
 export default routes;

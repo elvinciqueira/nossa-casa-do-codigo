@@ -3,6 +3,25 @@ import Categoria from '../models/Categoria';
 import Livro from '../models/Livro';
 
 class LivroController {
+  async index(req, res) {
+    const livros = await Livro.findAll({
+      include: [
+        {
+          model: Categoria,
+          as: 'categoria',
+          attributes: ['nome'],
+        },
+        {
+          model: Autor,
+          as: 'autor',
+          attributes: ['nome', 'email', 'descricao'],
+        },
+      ],
+    });
+
+    return res.json(livros);
+  }
+
   async create(req, res) {
     const { categoria_id, autor_id } = req.body;
 
