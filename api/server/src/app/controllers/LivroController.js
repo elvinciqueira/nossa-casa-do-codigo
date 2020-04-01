@@ -4,20 +4,7 @@ import Livro from '../models/Livro';
 
 class LivroController {
   async index(req, res) {
-    const livros = await Livro.findAll({
-      include: [
-        {
-          model: Categoria,
-          as: 'categoria',
-          attributes: ['nome'],
-        },
-        {
-          model: Autor,
-          as: 'autor',
-          attributes: ['nome', 'email', 'descricao'],
-        },
-      ],
-    });
+    const livros = await Livro.findAll();
 
     return res.json(livros);
   }
