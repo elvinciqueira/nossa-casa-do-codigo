@@ -38,5 +38,6 @@ routes.post(
   LivroController.create
 );
 routes.get('/livros', LivroController.index);
+routes.get('/livros/:id', LivroController.showById);
 
 export default routes;
