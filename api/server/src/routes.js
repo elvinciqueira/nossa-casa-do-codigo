@@ -1,8 +1,11 @@
 import { Router } from 'express';
 
+import SessionController from './app/controllers/SessionController';
 import AutorController from './app/controllers/AutorController';
 import CategoriaController from './app/controllers/CategoriaController';
 import LivroController from './app/controllers/LivroController';
+
+import authMiddleware from './app/middlewares/auth';
 
 import validateAutorStore from './app/validators/AutorStore';
 import validateEmailAutor from './app/validators/CheckEmailAutor';
@@ -12,6 +15,10 @@ import validateLivroCategoria from './app/validators/CheckLivros';
 import validateLivroCreate from './app/validators/LivroCreate';
 
 const routes = new Router();
+
+routes.post('/sessions', SessionController.create);
+
+routes.use(authMiddleware);
 
 routes.post(
   '/autor',
