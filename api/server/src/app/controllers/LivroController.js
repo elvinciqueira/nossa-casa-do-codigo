@@ -4,7 +4,18 @@ import Livro from '../models/Livro';
 
 class LivroController {
   async index(req, res) {
-    const livros = await Livro.findAll();
+    const livros = await Livro.findAll({
+      attributes: [
+        'titulo',
+        'id',
+        'resumo',
+        'sumario',
+        'isbn',
+        'preco',
+        'paginas',
+        'data_publicacao',
+      ],
+    });
 
     return res.json(livros);
   }
