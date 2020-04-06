@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 import User from '../models/User';
 import authConfig from '../../config/auth';
@@ -15,6 +16,10 @@ class SessionController {
 
     if (!(await user.checkPassword(password))) {
       return res.status(401).json({ error: 'Senha incorreta. ' });
+    }
+
+    if (user.password) {
+      user.password_hash = await bcrypt.compare(user.password, 8);
     }
 
     const { id, nome, provider } = user;
