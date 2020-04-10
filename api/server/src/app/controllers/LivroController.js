@@ -5,6 +5,23 @@ import Livro from '../models/Livro';
 class LivroController {
   async index(req, res) {
     const livros = await Livro.findAll({
+      attributes: [
+        'titulo',
+        'id',
+        'resumo',
+        'sumario',
+        'isbn',
+        'preco',
+        'paginas',
+        'data_publicacao',
+      ],
+    });
+
+    return res.json(livros);
+  }
+
+  async showById(req, res) {
+    const listaLivros = await Livro.findByPk(req.params.id, {
       include: [
         {
           model: Categoria,
@@ -19,7 +36,11 @@ class LivroController {
       ],
     });
 
-    return res.json(livros);
+    if (!listaLivros) {
+      return res.status(404).json({ error: 'O livro não existe' });
+    }
+
+    return res.json(listaLivros);
   }
 
   async create(req, res) {
